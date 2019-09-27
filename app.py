@@ -132,7 +132,7 @@ def input_qestion():
             for word in words_all:
                 result_all.append(word)
             answer = analyse_question(result + result_all)
-            return render_template("statmoss.html",question = fencis, result_all = answer)
+            return render_template("statmoss.html",question = fencis, answer = answer)
 #return render_template("statmoss.html",result=result,result_flags=result_flags,result_all = answer)
     return render_template("statmoss.html")
 

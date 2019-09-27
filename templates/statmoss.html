@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Xiaotaotao</title>
-</head>
-<body>
- 
-<form method="post">
-    <label>姓名：</label><input type="text" name="username" placeholder="请输入姓名"><br/>
-    <label>年纪：</label><input type="password" name="userage" placeholder="请输入年纪"><br/>
-    <input type="submit" value="提交">
-</form>
- 
-</body>
+    <head>
+        <meta charset="UTF-8">
+            <title>ch_tool</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+    </head>
+    <body>
+        
+        <form method="post" action="/input_qestion">
+            <label>请提问：</label><input type="text" name="input_qestion" placeholder="请输入你想知道的问题"><br/>
+                <input name = "fenci_button" type="submit" value="提交">
+        </form>
+        {% if result %}
+        <table class="table" width="200px" table-layout="fixed">
+            <tbody>
+                {% for key in result %}
+                <tr>
+                    {{key}},
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if result_flags %}
+        <table class="table" width="200px" table-layout="fixed">
+            <tbody>
+                {% for key in result_flags %}
+                <tr>
+                    {{key}},
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if question %}
+        <table class="table" width="200px" table-layout="fixed">
+            <tbody>
+                问题：
+                {{question}}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if answer %}
+        <table class="table" width="200px" table-layout="fixed">
+            <tbody>
+                {{answer}}
+        </table>
+        {% endif %}
+        
+        
+    </body>
 </html>
+
