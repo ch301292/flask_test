@@ -113,14 +113,13 @@ def login2():
             return render_template("login.html",result=result,result_flags=result_flags,result_all = result_all)
     return render_template("login.html")
 
-@app.route('/input_qestion', methods=["GET", "POST"])
-def input_qestion():
+@app.route('/input_question', methods=["GET", "POST"])
+def input_question():
     answer = "我不知道啊，什么破问题"
     if request.method == "POST":
-        fencis = request.form.get("input_qestion")
+        fencis = request.form.get("input_question")
         if (len(fencis) is not 0):
             print("jinxifenci is:" + fencis)
-            jieba.load_userdict("test_dict.txt")
             result_flags = []
             result = []
             words = pseg.lcut(fencis)
