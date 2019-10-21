@@ -1,5 +1,41 @@
 import sqlite3
 #########
+def initial_temp_data():
+    conn = sqlite3.connect("nba_stats.db")  #创建sqlite.db数据库
+    print ("open database success")
+    conn.execute("drop table IF EXISTS temp_data")
+    query = """create table IF NOT EXISTS temp_data(
+        A VARCHAR(20),
+        B VARCHAR(20),
+        C VARCHAR(20),
+        D VARCHAR(20),
+        E VARCHAR(20),
+        F VARCHAR(20),
+        G VARCHAR(20),
+        H VARCHAR(20),
+        I VARCHAR(20),
+        J VARCHAR(20),
+        K VARCHAR(20),
+        L VARCHAR(20),
+        M VARCHAR(20),
+        N VARCHAR(20),
+        O VARCHAR(20),
+        P VARCHAR(20),
+        Q VARCHAR(20),
+        R VARCHAR(20),
+        S VARCHAR(20),
+        T VARCHAR(20),
+        U VARCHAR(20)
+        );"""
+    conn.execute(query)
+    print ("Table created successfully")
+
+def insert_temp_data(data):
+    statement = "INSERT INTO temp_data VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+    conn = sqlite3.connect("nba_stats.db")
+    conn.executemany(statement, data)
+    conn.commit()
+
 def initial_game_data():
     conn = sqlite3.connect("nba_stats.db")  #创建sqlite.db数据库
     print ("open database success")
