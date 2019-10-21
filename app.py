@@ -13,7 +13,34 @@ from database_temp import *
 app = Flask(__name__)
 PEOPLE_FOLDER = os.path.join('static', 'people_photo')
 app.config['UPLOAD_FOLDER']= PEOPLE_FOLDER
-testnew = {}
+x_d = {}
+name_list = keyword_from_file("name_file.txt")
+for x in name_list:
+    a = x.split(",")
+    #print(a)
+    b = a[0].split(" ")
+    name1 =b[0]
+    if len(b) > 1:
+        name2 = b[1]
+    name3 = name1 + name2
+    eng_name = a[1]
+    
+    if (x_d.__contains__(name1)):
+        x_d[name1] = x_d[name1]  + "," + a[1]
+    else:
+        x_d[name1] = eng_name
+    
+    if (x_d.__contains__(name2)):
+        x_d[name2] = x_d[name2]  + "," + a[1]
+    else:
+        x_d[name2] = eng_name
+    
+    if (x_d.__contains__(name3)):
+        x_d[name3] = x_d[name3]  + "," + a[1]
+    else:
+        x_d[name3] = eng_name
+
+
 
 
 # use decorators to link the function to a url
@@ -145,7 +172,8 @@ def analyse_question(question_fenci):
     target_name = ""
     target_column = ""
     target_condition = ""
-    target_name_list = {"哈登":"Harden","詹姆斯":"Lebron","库里":"Stephen Curry","泡椒":"Paul George","莱恩纳德":"Kawhi Leonard","杜兰特":"Kevin Durant"}
+    #target_name_list = {"哈登":"Harden","詹姆斯":"Lebron","库里":"Stephen Curry","泡椒":"Paul George","莱恩纳德":"Kawhi Leonard","杜兰特":"Kevin Durant"}
+    target_name_list = x_d
     target_condition_list = ["最","最多","最高"]
     target_column_list = ["分","篮板","助攻","失误","盖帽","抢断","板","得分","最高分","几分"]
     print(question_fenci)
@@ -167,8 +195,10 @@ def analyse_question(question_fenci):
 
 
 def get_a_game_data(playername,column,condition):
-    temp_dict = {"哈登":"Harden","詹姆斯":"Lebron","勒布朗":"Lebron","库里":"Stephen Curry","泡椒":"Paul George","小卡":"Paul George","莱恩纳德":"Kawhi Leonard","伦纳德":"Kawhi Leonard","小卡":"Kawhi Leonard","杜兰特":"Kevin Durant"}
+    #temp_dict = {"哈登":"Harden","詹姆斯":"Lebron","勒布朗":"Lebron","库里":"Stephen Curry","泡椒":"Paul George","小卡":"Paul George","莱恩纳德":"Kawhi Leonard","伦纳德":"Kawhi Leonard","小卡":"Kawhi Leonard","杜兰特":"Kevin Durant"}
+    temp_dict = x_d
     player_name = temp_dict[playername]
+    player_name = player_name.split(",")[0]
     temp_dict2 = {"得分":"pts","篮板":"reb","助攻":"ast","板":"reb","分":"pts","最高分":"pts","抢断":"stl","失误":"tov","盖帽":"BLK","几分":"pts"}
     column = temp_dict2[column]
     test = get_player_record_data(player_name,column,condition = "DESC")
